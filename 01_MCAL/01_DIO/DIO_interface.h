@@ -42,6 +42,15 @@ SWC    : DIO/GPIO
 #define DIO_PORT_HIGH  0xFF
 #define DIO_PORT_LOW   0x00
 
+//add enum for errors
+
+typedef enum
+{
+    DIO_NOK,
+    DIO_OK
+}DIO_ERROR_STAT;
+
+
 
 void DIO_VOIDSetPinDirection(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Direction);
 void DIO_VOIDSetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Value);
