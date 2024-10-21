@@ -8,6 +8,13 @@ SWC    : DIO/GPIO
 #ifndef _DIO_INTERFACE_H_
 #define _DIO_INTERFACE_H_
 
+typedef enum 
+{
+    DIO_NOK,
+    DIO_OK
+}DIO_ErrorStatus;
+
+
 // Defination of the direction
 #define DIO_PIN_OUTPUT 1
 #define DIO_PIN_INPUT 0
@@ -44,23 +51,22 @@ SWC    : DIO/GPIO
 
 //add enum for errors
 
-typedef enum
-{
-    DIO_NOK,
-    DIO_OK
-}DIO_ERROR_STAT;
 
 
 
-void DIO_VOIDSetPinDirection(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Direction);
-void DIO_VOIDSetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Value);
-u8 DIO_VOIDGetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN);
-void DIO_VOIDTogglePinValue(u8 Copy_u8PORT, u8 Copy_u8PIN);
+
+DIO_ErrorStatus  DIO_VOIDSetPinDirection(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Direction);
+DIO_ErrorStatus  DIO_VOIDSetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Value);
+DIO_ErrorStatus  DIO_VOIDGetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN);
+DIO_ErrorStatus  DIO_VOIDTogglePinValue(u8 Copy_u8PORT, u8 Copy_u8PIN);
 
 // Tasks
-void DIO_VOIDSetPortirection(u8 Copy_u8PORT, u8 Copy_u8Direction);
-void DIO_VOIDSetPortValue(u8 Copy_u8PORT, u8 Copy_u8Value);
-u8 DIO_VOIDGetPortValue(u8 Copy_u8PORT);
-void DIO_VOIDTogglePortValue(u8 Copy_u8PORT);
+DIO_ErrorStatus DIO_VOIDSetPortirection(u8 Copy_u8PORT, u8 Copy_u8Direction);
+DIO_ErrorStatus DIO_VOIDSetPortValue(u8 Copy_u8PORT, u8 Copy_u8Value);
+DIO_ErrorStatus DIO_VOIDGetPortValue(u8 Copy_u8PORT);
+DIO_ErrorStatus DIO_VOIDTogglePortValue(u8 Copy_u8PORT);
+
+
+ 
 
 #endif
