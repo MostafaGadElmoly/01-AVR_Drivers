@@ -57,15 +57,15 @@ DIO_ErrorStatus DIO_VOIDSetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 Copy_u8Val
     return LOC_enumState;
 }
 
-DIO_ErrorStatus DIO_VOIDGetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN) {
+DIO_ErrorStatus DIO_VOIDGetPinValue(u8 Copy_u8PORT, u8 Copy_u8PIN, u8 *copy_PrtData) {
     DIO_ErrorStatus LOC_enumState = DIO_OK;
     u8 LOCAL_u8Value = 0;
 
     if ((Copy_u8PORT <= DIO_PORTD) && (Copy_u8PIN <= DIO_PIN7)) {    
         switch (Copy_u8PORT) {
-            case DIO_PORTB: LOCAL_u8Value = GET_BIT(PINB, Copy_u8PIN); break;
-            case DIO_PORTC: LOCAL_u8Value = GET_BIT(PINC, Copy_u8PIN); break;
-            case DIO_PORTD: LOCAL_u8Value = GET_BIT(PIND, Copy_u8PIN); break;
+            case DIO_PORTB: * copy_PrtData = GET_BIT(PINB, Copy_u8PIN); break;
+            case DIO_PORTC: * copy_PrtData = GET_BIT(PINC, Copy_u8PIN); break;
+            case DIO_PORTD: * copy_PrtData = GET_BIT(PIND, Copy_u8PIN); break;
         }
     } else {
         LOC_enumState = DIO_NOK;
@@ -142,23 +142,15 @@ DIO_ErrorStatus DIO_VOIDSetPortValue(u8 Copy_u8PORT, u8 Copy_u8Value) {
     return LOC_enumState;
 }
 
-DIO_ErrorStatus DIO_VOIDGetPortValue(u8 Copy_u8PORT) {
+DIO_ErrorStatus DIO_VOIDGetPortValue(u8 Copy_u8PORT, u8 *Copy_PtrData) {
     DIO_ErrorStatus LOC_enumState = DIO_OK;
-    u8 LOCAL_u8Value = 0;
+     u8 LOCAL_u8Value = 0;
 
     if (Copy_u8PORT <= DIO_PORTD) {
         switch (Copy_u8PORT) {
-            case DIO_PORTB: LOCAL_u8Value = PINB; break;
-            case DIO_PORTC: LOCAL_u8Value = PINC; break;
-            case DIO_PORTD: LOCAL_u8Value = PIND; break;
-        }
-
-        if (LOCAL_u8Value == 0xFF) {
-            return ALL_PINS_HIGH;
-        } else if (LOCAL_u8Value == 0x00) {
-            return ALL_PINS_LOW;
-        } else {
-            return MIXED_PIN_VALUES;
+            case DIO_PORTB: * Copy_PtrData = PINB; break;
+            case DIO_PORTC: * Copy_PtrData = PINC; break;
+            case DIO_PORTD: * Copy_PtrData = PIND; break;
         }
     } else {
         LOC_enumState = DIO_NOK;
